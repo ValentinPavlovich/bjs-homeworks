@@ -11,8 +11,27 @@ function calculateQuadraticEquation(){
 }
 
 function getResult(a,b,c){
-    // код для задачи №1 писать здесь
-    //return x;
+    // код для задачи №1
+    "use strict";
+
+    let D = Math.pow(b, 2) - 4 * a * c;
+    console.log('Дискриминант: ' + D);
+
+    if (D < 0) {
+        console.log('Корней нет');
+        return;
+      } else {
+          if (D === 0) {
+            let x = (-b) / (2 * a);
+            console.log('Один корень: ' + x);
+            return x;
+          }
+          console.log('Два корня: ' + ((-b) + Math.sqrt(Math.pow(b, 2) - 4 * a * c)) / (2 * a) + ', ' + ((-b) - Math.sqrt(Math.pow(b, 2) - 4 * a * c)) / (2 * a));
+          return [
+              ((-b) + Math.sqrt(Math.pow(b, 2) - 4 * a * c)) / (2 * a),
+              ((-b) - Math.sqrt(Math.pow(b, 2) - 4 * a * c)) / (2 * a)
+          ];
+        }
 }
 
 function calculateDrinkTask(){
