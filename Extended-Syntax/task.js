@@ -12,6 +12,7 @@ function calculateQuadraticEquation(){
 
 function getResult(a,b,c){
     // код для задачи №1
+
     "use strict";
 
     let D = Math.pow(b, 2) - 4 * a * c;
@@ -42,7 +43,7 @@ function calculateDrinkTask(){
 }
 
 function askDrink(name,dateOfBirthday){
-    // код для задачи №2 писать здесь
+    // код для задачи №3 писать здесь
     //console.log(result)
     //return result;
 }
@@ -54,6 +55,18 @@ function calculateAverageRating(){
 }
 
 function getAverageMark(marks){
-    // код для задачи №3 писать здесь
-    //return averageMark;
+    // код для задачи №2
+
+    if (marks.length > 5) {
+        console.log('Количество оценок больше 5');
+        marks.length = 5;
+    }
+
+    let sumOfMarks = 0;
+    for (let i = 0; i < marks.length; i++) {
+        sumOfMarks += marks[i]
+    }
+    
+    let averageMark = sumOfMarks / marks.length;
+    return averageMark;
 }
