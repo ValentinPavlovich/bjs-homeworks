@@ -80,3 +80,47 @@ console.log(getAverageScore({
     chemistry: [2],
     french: [4, 4]
 }));
+
+// Задача №3. Расшифровка данных
+function getPersonData(secretData) {
+    console.log('\n');
+    
+    for (let prop in secretData) {
+        let value = secretData[ prop ];
+        
+        if (prop === 'aaa') {
+            data = 'firstName'
+        } else {
+            data = 'lastName'
+        }
+
+        if (value === 0) {
+            name = 'Родриго'
+        } else {
+            name = 'Эмильо'
+        }
+
+    console.log(`${data}: "${name}"`);
+    }
+    return secretData;
+}
+
+console.log(getPersonData({
+    aaa: 0,
+    bbb: 0
+}));
+
+console.log(getPersonData({
+    aaa: 1,
+    bbb: 0
+}));
+
+console.log(getPersonData({
+    aaa: 0,
+    bbb: 1
+}));
+
+console.log(getPersonData({
+    aaa: 1,
+    bbb: 1
+}));
