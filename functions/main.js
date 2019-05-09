@@ -13,8 +13,8 @@ function getSolutions(a,b,c) {
             D: D
         };
     } else {
-        let x1 = ((-b) + Math.sqrt(Math.pow(b, 2) - 4 * a * c)) / (2 * a);
-        let x2 = ((-b) - Math.sqrt(Math.pow(b, 2) - 4 * a * c)) / (2 * a);
+        let x1 = ((-b) + Math.sqrt(D)) / (2 * a);
+        let x2 = ((-b) - Math.sqrt(D)) / (2 * a);
         return {
             roots: [ x1, x2 ],
             D: D
@@ -47,26 +47,34 @@ showSolutionsMessage(2,4,2);
 function getAverageScore(data) {
     console.log('\n');
 
-    let averageSumOfMarks = 0;
     let k = 0;
+    let averageSumOfMarks = 0;
+    let arr = {};
+
     for (let prop in data) {
-        let value = data[ prop ];
-        
-        let sumOfMarks = 0;
-        for (let i = 0; i < value.length; i++) {
-            sumOfMarks += value[i]
-        }
-        
-        let averageMark = sumOfMarks /value.length;
+        let averageMark = 0;
+
+        averageMark = sum(data[prop]);
         console.log(`${prop}: ${averageMark}`);
 
         averageSumOfMarks += averageMark;
+        arr[prop] = averageMark;
         k++;
     }
+
+    function sum(value) {
     
-    data.average = averageSumOfMarks/k;
-    console.log('average: ' + data.average);
-    return data;
+        let averageMark = 0;
+        for (let i = 0; i < value.length; i++) {
+            averageMark += value[i]
+        }
+        averageMark = averageMark / value.length
+        return averageMark;
+    }    
+        
+    averageSumOfMarks = averageSumOfMarks / k;
+    console.log('average: ' + averageSumOfMarks);
+    return arr;
 }
 
 console.log(getAverageScore({
@@ -85,24 +93,15 @@ console.log(getAverageScore({
 function getPersonData(secretData) {
     console.log('\n');
     
-    for (let prop in secretData) {
-        let value = secretData[ prop ];
-        
-        if (prop === 'aaa') {
-            data = 'firstName'
-        } else {
-            data = 'lastName'
-        }
-
-        if (value === 0) {
-            name = 'Родриго'
-        } else {
-            name = 'Эмильо'
-        }
-
-    console.log(`${data}: "${name}"`);
-    }
-    return secretData;
+    function nameSearch(value) {
+		let name = ["Родриго", "Эмильо"];
+		return name[value];
+	}
+    
+    return {
+		firstName: nameSearch(secretData.aaa), 
+		lastName: nameSearch(secretData.bbb)
+	};
 }
 
 console.log(getPersonData({
