@@ -11,37 +11,32 @@ console.log(compareArrays([8, 1, 2], [8, 1, 2]));
 console.log('\n');
 
 
-function memoize(fn, limit) {
-
+function memoize(fn, limit) {  
   let results = [];
   
-  return function (arg1, arg2) {
-    let args1 = [arg1, arg2];
+	return function () {
+		let res = results.find((func) => compareArrays(func.args, [...arguments]));
+          
+		if (res) {
+      console.log('Функция вызвана из памяти');         
+			return res.result;
     
-    let i = 0;
-      while (i < results.length)  {
-     
-          if (compareArrays(results[i].args, args1)) {
-            console.log('Функция вызвана из памяти');
-            return results[i].args;
-          }
-
-        i++ 
-      }
-            
-      results.unshift({
-          args: args1,
-          result: fn(...arguments)
+    } else {
+      res = fn(...arguments);
+			results.unshift({
+          args: [...arguments],
+          result: res
       });
+	}
 
-      if (results.length > limit) {
-        results.pop();
-    }
-    
-    return fn(...arguments);
-
-  }
+		if (results.length > limit) {
+			results.pop();
+    }    
+		
+		return res;
+	}
 }
+
 
 const sum = (a, b) => {
   console.log('Функция вызвана не из памяти');
@@ -50,8 +45,7 @@ const sum = (a, b) => {
 
 const mSum = memoize(sum, 2);
 
-console.log(sum(3, 4));
-console.log(mSum(3, 4));
+
 console.log(mSum(3, 4));
 console.log(mSum(3, 4));
 console.log('\n');
@@ -76,3 +70,10 @@ console.log(mSum(7, 9));
 console.log(mSum(7, 9));
 console.log(mSum(7, 9));
 console.log(mSum(7, 9));
+console.log('\n');
+
+console.log(mSum(435, 4));
+console.log(mSum(3, 66));
+console.log(mSum(3, 34634));
+console.log(mSum(67, 4));
+console.log(mSum(3543, 4564));
